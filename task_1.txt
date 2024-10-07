@@ -1,0 +1,64 @@
+package main
+
+import (
+	"errors"
+	"fmt"
+)
+
+type cliCommand struct {
+	name        string
+	description string
+	callback    func() error
+}
+
+var ErrExit = errors.New("exit")
+
+func main() {
+	commands := commandInp()
+	var i string
+	for {
+		fmt.Print("Pokedex> ")
+		fmt.Scan(&i)
+		cmd, exists := commands[i]
+		if exists {
+			if err := cmd.callback(); err != nil {
+				if errors.Is(err, ErrExit) {
+					break
+				}
+				fmt.Println("Error:", err)
+			}
+
+		} else {
+			fmt.Println("Unknown command:", i)
+		}
+	}
+}
+
+func commandInp() map[string]cliCommand {
+	return map[string]cliCommand{
+		"help": {
+			name:        "help",
+			description: "Displays a help message",
+			callback:    commandHelp,
+		},
+		"exit": {
+			name:        "exit",
+			description: "Exit the Pokedex",
+			callback:    commandExit,
+		},
+	}
+
+}
+
+func commandHelp() error {
+	fmt.Println("Welcomt to Pokedex! \nUsage:")
+	for _, cmd := range commandInp() {
+		fmt.Printf("%s: %s\n", cmd.name, cmd.description)
+	}
+	return nil
+}
+
+func commandExit() error {
+	fmt.Println("Exiting the Pokedex.")
+	return ErrExit
+}
