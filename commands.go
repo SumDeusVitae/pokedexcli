@@ -44,7 +44,7 @@ func getCommands() map[string]cliCommand {
 		},
 		"history": {
 			name:        "history",
-			description: "Returns history of t commands",
+			description: "Returns history of commands",
 			callback:    callbackHistory,
 		},
 		"clear": {
