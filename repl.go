@@ -1,21 +1,48 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"os"
 	"strings"
+
+	"github.com/chzyer/readline"
 )
 
 func startRepl(cfg *config) {
-	reader := bufio.NewScanner(os.Stdin)
-	for {
-		fmt.Print("Pokedex > ")
-		reader.Scan()
+	// Create a readline instance
+	rl, err := readline.NewEx(&readline.Config{
+		Prompt: "Pokedex > ",
+		// HistoryFile: "history.txt", // Save history to a file
+	})
+	if err != nil {
+		fmt.Println("Error creating readline instance:", err)
+		return
+	}
+	defer rl.Close()
 
-		words := cleanInput(reader.Text())
+	for {
+		line, err := rl.Readline()
+		if err != nil {
+			fmt.Println("Error reading line:", err)
+			continue
+		}
+
+		words := cleanInput(line)
 		if len(words) == 0 {
 			continue
+		}
+
+		call := strings.Join(words, " ")
+
+		if len(cfg.history) < 1 || cfg.history[cfg.current_history_index] != call {
+			for i, s := range cfg.history {
+				if s == call {
+					if i < len(cfg.history) {
+						cfg.history = append(cfg.history[:i], cfg.history[i+1:]...)
+					}
+				}
+			}
+			cfg.history = append(cfg.history, call)
+			cfg.current_history_index = len(cfg.history) - 1
 		}
 
 		commandName := words[0]
@@ -30,10 +57,8 @@ func startRepl(cfg *config) {
 			if err != nil {
 				fmt.Println(err)
 			}
-			continue
 		} else {
-			fmt.Println("Unknown command:%w", command)
-			continue
+			fmt.Printf("Unknown command: %s\n", commandName)
 		}
 	}
 }
@@ -48,50 +73,4 @@ type cliCommand struct {
 	name        string
 	description string
 	callback    func(*config, ...string) error
-}
-
-func getCommands() map[string]cliCommand {
-	return map[string]cliCommand{
-		"help": {
-			name:        "help",
-			description: "Displays a help message",
-			callback:    callbackHelp,
-		},
-		"exit": {
-			name:        "exit",
-			description: "Exit the Pokedex",
-			callback:    callbackExit,
-		},
-		"map": {
-			name:        "map",
-			description: "Get the next page of locations",
-			callback:    callbackMapf,
-		},
-		"mapb": {
-			name:        "mapb",
-			description: "Get the previous page of locations",
-			callback:    callbackMapb,
-		},
-		"explore": {
-			name:        "explore {location_area}",
-			description: "Return list of pokemons in the area",
-			callback:    callbackExplore,
-		},
-		"catch": {
-			name:        "catch {pokemon_name}",
-			description: "Trying to catch pokemon",
-			callback:    callbackCatch,
-		},
-		"inspect": {
-			name:        "inspect {pokemon_name}",
-			description: "Inspects catched pokemon",
-			callback:    callbackInspect,
-		},
-		"pokedex": {
-			name:        "pokedex",
-			description: "Lists pokemons in pokedex",
-			callback:    callbackPokedex,
-		},
-	}
-
 }
