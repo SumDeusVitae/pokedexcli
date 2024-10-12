@@ -5,6 +5,7 @@ Here are some useful information.
 - [Installation](#installation)
 - [Usage](#usage)
 - [Commands](#commands)
+- [Credit](#credit)
 - [License](#license)
 
 
@@ -33,16 +34,21 @@ To run the project, use the following command:
 
 
 ## Commands 
-          help:                     Displays a help message
-          exit:                     Exit the Pokedex
-          clear:                    Clears cli
-          map:                      Get the next page of locations
-          mapb:                     Get the previous page of locations
-          inspect {pokemon_name}:   Inspects catched pokemon
-          explore {location_area}:  Return list of pokemons in the area
-          catch {pokemon_name}:     Trying to catch pokemon
-          pokedex:                  Lists pokemons in pokedex
-          history:                  Returns history of commands
+- **help**:                     Displays a help message
+- **exit**:                     Exit the Pokedex
+- **clear**:                    Clears cli
+- **map**:                      Get the next page of locations
+- **mapb**:                     Get the previous page of locations
+- **inspect {*pokemon_name*}**:   Inspects catched pokemon
+- **explore {*location_area*}**:  Return list of pokemons in the area
+- **catch {*pokemon_name*}**:     Trying to catch pokemon
+- **pokedex**:                  Lists pokemons in pokedex
+- **history**:                  Returns history of commands
+
+## Credit
+> [**chzyer**](https://github.com/chzyer/readline) >> for pure go(golang) implementation of GNU-Readline kind library 
+
+
 
 ## License
 This project is licensed under the [MIT License](LICENSE).
