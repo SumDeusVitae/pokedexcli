@@ -1,9 +1,5 @@
 <div align="center">
-  <h1>Pokedex REPL<br>
-  (Read, Evaluate, Print, and Loop)
-  <br> <br>
-  Here is some helpful information</h1>
-
+  <h1>Pokedex REPL<br>(Read, Evaluate, Print, and Loop)</h1>
 </div>
 
 
