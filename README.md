@@ -41,9 +41,9 @@ To run the project, use the following command:
 - `clear`:                    Clears cli
 - `map`:                      Get the next page of locations
 - `mapb`:                     Get the previous page of locations
-- `inspect {*pokemon_name*}`:   Inspects catched pokemon
-- `explore {*location_area*}`:  Return list of pokemons in the area
-- `catch {*pokemon_name*}`:     Trying to catch pokemon
+- `inspect {pokemon_name}`:   Inspects catched pokemon
+- `explore {location_area}`:  Return list of pokemons in the area
+- `catch {pokemon_name}`:     Trying to catch pokemon
 - `pokedex`:                  Lists pokemons in pokedex
 - `history`:                  Returns history of commands
 
