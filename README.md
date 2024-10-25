@@ -4,12 +4,15 @@
 
 
 ## Table of Contents
+- [Introduction](#introduction)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Commands](#commands)
 - [Credit](#credit)
 - [License](#license)
 
+## Introduction
+A REPL, or Read-Eval-Print Loop, is a simple interactive programming environment that takes user input, evaluates it, and returns the result to the user. This project is about a Pokedex-like REPL in Go that uses the PokeAPI to fetch data about  Pokemon.
 
 ## Installation
 1. Clone the repository:
